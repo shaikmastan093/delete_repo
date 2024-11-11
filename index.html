@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <script defer src="./assets/scripts/index.js"></script>
+  <title>My Business Card - Selvendran S</title>
+  <link rel="stylesheet" href="assets/styles/index.css" />
+  <link rel="stylesheet" href="assets/styles/style.css" />
+</head>
+
+<body>
+  <div id="example-scanning-overlay" class="hidden">
+    <div class="inner">
+      <img src="./assets/target/ID.png" />
+      <div class="scanline"></div>
+    </div>
+  </div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./assets/target/paint.mind; filterMinCF:0.001; filterBeta: 0.09; uiScanning: #example-scanning-overlay"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+  >
+    <a-assets>
+      <img id="perfil" src="./assets/images/profile/DP.png" />
+      <a-asset-item id="3d-model" src="./assets/business.glb"></a-asset-item>
+      <video id="my-video" src="./assets/videos/VR.mp4" autoplay="true" muted="true" playsinline="true" loop="true"></video>
+      <img id="about-image" src="./assets/images/about.png" />
+    </a-assets>
+
+    <a-camera
+      position="0 0 0"
+      look-controls="enabled: false"
+      cursor="fuse: false; rayOrigin: mouse;"
+      raycaster="far: 10000; objects: .clickable;"
+    ></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-entity>
+        <a-image
+          id="foto-perfil"
+          position="0.7 0.5 -0.04"
+          height="0.2"
+          width="0.2"
+          src="#perfil"
+          scale="1.5 1.5 1.5"
+          material="shader: flat; side: double;"
+        ></a-image>
+
+        <a-text
+          value="SELVENDRAN S"
+          color="white"
+          position="0.9 0.6 -0.04"
+          width="1.5"
+          align="left"
+          font="roboto"
+          scale="1.5 1.5 1.5"
+        ></a-text>
+
+        <a-text
+          value="VR-AR TECHNICAL"
+          color="red"
+          position="0.9 0.4 -0.04"
+          width="1"
+          align="left"
+          font="roboto"
+          scale="1.5 1.5 1.5"
+        ></a-text>
+      </a-entity>
+
+      <a-entity position="0.5 -0.5 -0.05">
+        <!-- LinkedIn Button -->
+        <a-image
+          class="clickable"
+          position="0.6 0.6 0"
+          width="0.6"
+          height="0.2"
+          src="./assets/images/but.png" 
+          onclick="window.open('https://linkedin.com', '_blank')"
+        >
+          <a-text value="LinkedIn" color="white" align="center" position="0 0 0.01" scale="0.5 0.5 0.5"></a-text>
+        </a-image>
+      
+        <!-- Website Button -->
+        <a-image
+          class="clickable"
+          position="1.2 0.6 0"
+          width="0.6"
+          height="0.2"
+          src="./assets/images/but.png" 
+          onclick="window.open('https://infrazanalytics.com', '_blank')"
+        >
+          <a-text value="Website" color="white" align="center" position="0 0 0.01" scale="0.5 0.5 0.5"></a-text>
+        </a-image>
+      
+        <!-- Email Button -->
+        <a-image
+          class="clickable"
+          position="0.6 0.2 0"
+          width="0.6"
+          height="0.2"
+          src="./assets/images/but.png" 
+          onclick="window.open('mailto:selvendran@example.com', '_blank')"
+        >
+          <a-text value="Email" color="white" align="center" position="0 0 0.01" scale="0.5 0.5 0.5"></a-text>
+        </a-image>
+      
+        <!-- About Me Button -->
+        <a-image
+          class="clickable"
+          position="1.2 0.2 0"
+          width="0.6"
+          height="0.2"
+          src="./assets/images/but.png" 
+          onclick="document.querySelector('#popup-about').setAttribute('visible', true)"
+        >
+          <a-text value="About Me" color="white" align="center" position="0 0 0.01" scale="0.5 0.5 0.5"></a-text>
+        </a-image>
+      </a-entity>
+      
+
+      <!-- Pop-Up Image to the Right of Profile Image -->
+      <a-image
+        id="popup-about"
+        src="#about-image"
+        position="-1 0.1 -0.04"
+        width="0.4"
+        height="0.4"
+        scale="2.5 2.5 2.5"
+        visible="false"
+      ></a-image>
+    </a-entity>
+  </a-scene>
+</body>
+</html>
